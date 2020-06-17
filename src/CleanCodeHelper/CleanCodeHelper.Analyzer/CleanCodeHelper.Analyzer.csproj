@@ -9,14 +9,16 @@
 
   <PropertyGroup>
     <PackageId>CleanCodeHelper.Analyzer</PackageId>
+    <Title>Clean Code Helper</Title>
+    <Description>Clean Code Helper</Description>
     <VersionPrefix>0.0.1</VersionPrefix>
     <VersionSuffix>alpha</VersionSuffix>
     <Authors>Johannes Schmitt</Authors>
+    <Copyright>Johannes Schmitt</Copyright>
     <PackageProjectUrl>https://github.com/johannes-schmitt/CleanCodeHelper</PackageProjectUrl>
     <RepositoryUrl>https://github.com/johannes-schmitt/CleanCodeHelper</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <Description>CleanCodeHelper.Analyzer</Description>
     <PackageReleaseNotes></PackageReleaseNotes>
     <PackageTags>CleanCodeHelper.Analyzer, analyzers</PackageTags>
     <NoPackageAnalysis>true</NoPackageAnalysis>
@@ -36,5 +38,4 @@
     <None Update="tools\*.ps1" CopyToOutputDirectory="Always" Pack="true" PackagePath="" />
     <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
   </ItemGroup>
-
 </Project>
