@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -85,20 +86,18 @@ namespace CleanCodeHelper.Analyzer
 
         private static bool ContainsWord(string input, string word)
         {
-            for (var idx = input.IndexOf(word, 0, StringComparison.OrdinalIgnoreCase);
+            return FindSubstrings(input, word).Any(substring => substring.Length == word.Length ||
+                                                                substring.Length > word.Length && !char.IsLower(substring[word.Length]));
+        }
+
+        private static IEnumerable<string> FindSubstrings(string input, string substring)
+        {
+            for (var idx = input.IndexOf(substring, 0, StringComparison.OrdinalIgnoreCase);
                 idx != -1;
-                idx = input.IndexOf(word, idx + 1, StringComparison.OrdinalIgnoreCase))
+                idx = input.IndexOf(substring, idx + 1, StringComparison.OrdinalIgnoreCase))
             {
-                var subString = input.Substring(idx);
-
-                if (subString.Length == word.Length ||
-                    subString.Length > word.Length && !char.IsLower(subString[word.Length]))
-                {
-                    return true;
-                }
+                yield return input.Substring(idx);
             }
-
-            return false;
         }
     }
 }

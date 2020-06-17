@@ -5,6 +5,7 @@
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <AvoidCycleErrorOnSelfReference>True</AvoidCycleErrorOnSelfReference>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -12,7 +13,7 @@
     <Title>Clean Code Helper</Title>
     <Description>Clean Code Helper</Description>
     <VersionPrefix>0.0.1</VersionPrefix>
-    <VersionSuffix>alpha</VersionSuffix>
+    <VersionSuffix>alpha.1</VersionSuffix>
     <Authors>Johannes Schmitt</Authors>
     <Copyright>Johannes Schmitt</Copyright>
     <PackageProjectUrl>https://github.com/johannes-schmitt/CleanCodeHelper</PackageProjectUrl>
@@ -26,6 +27,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CleanCodeHelper.Analyzer" Version="0.0.1-alpha" />
     <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.0.0">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
