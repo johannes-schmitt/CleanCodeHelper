@@ -1,0 +1,16 @@
+<Project>
+  <Choose>
+    <When Condition="$(AvoidCycleErrorOnSelfReference) == 'True'">
+      <PropertyGroup>
+        <PackageId Condition="'$(PackageId)' == ''">$(MSBuildProjectName)</PackageId>
+        <PackageIdTemp>$(PackageId)</PackageIdTemp>
+        <PackageId>$(PackageId)_temp</PackageId>
+      </PropertyGroup>
+    </When>
+  </Choose>
+  <Target Name="_UpdatePackageId" BeforeTargets="$(PackDependsOn)" Condition="$(AvoidCycleErrorOnSelfReference) == 'True'">
+    <PropertyGroup>
+      <PackageId>$(PackageIdTemp)</PackageId>
+    </PropertyGroup>
+  </Target>
+</Project>
