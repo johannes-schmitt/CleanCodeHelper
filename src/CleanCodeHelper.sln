@@ -3,30 +3,42 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30128.74
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanCodeHelper.Analyzer", "CleanCodeHelper\CleanCodeHelper.Analyzer\CleanCodeHelper.Analyzer.csproj", "{F7BD6B6E-6877-42FB-8EF5-24804CDCE531}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanCodeHelper.Analyzer", "CleanCodeHelper\CleanCodeHelper.Analyzer\CleanCodeHelper.Analyzer.csproj", "{F7BD6B6E-6877-42FB-8EF5-24804CDCE531}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanCodeHelper.Analyzer.Test", "CleanCodeHelper\CleanCodeHelper.Analyzer.Test\CleanCodeHelper.Analyzer.Test.csproj", "{BB58BAE4-8CD9-48E8-BF66-D193912CF687}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanCodeHelper.Analyzer.Test", "CleanCodeHelper\CleanCodeHelper.Analyzer.Test\CleanCodeHelper.Analyzer.Test.csproj", "{BB58BAE4-8CD9-48E8-BF66-D193912CF687}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanCodeHelper.Analyzer.Vsix", "CleanCodeHelper\CleanCodeHelper.Analyzer.Vsix\CleanCodeHelper.Analyzer.Vsix.csproj", "{D942394E-BE0E-4DF3-856B-251FB953ADAC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanCodeHelper.Analyzer.Vsix", "CleanCodeHelper\CleanCodeHelper.Analyzer.Vsix\CleanCodeHelper.Analyzer.Vsix.csproj", "{D942394E-BE0E-4DF3-856B-251FB953ADAC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		DebugVsix|Any CPU = DebugVsix|Any CPU
 		Release|Any CPU = Release|Any CPU
+		ReleaseVsix|Any CPU = ReleaseVsix|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{F7BD6B6E-6877-42FB-8EF5-24804CDCE531}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F7BD6B6E-6877-42FB-8EF5-24804CDCE531}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7BD6B6E-6877-42FB-8EF5-24804CDCE531}.DebugVsix|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7BD6B6E-6877-42FB-8EF5-24804CDCE531}.DebugVsix|Any CPU.Build.0 = Debug|Any CPU
 		{F7BD6B6E-6877-42FB-8EF5-24804CDCE531}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F7BD6B6E-6877-42FB-8EF5-24804CDCE531}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7BD6B6E-6877-42FB-8EF5-24804CDCE531}.ReleaseVsix|Any CPU.ActiveCfg = Release|Any CPU
+		{F7BD6B6E-6877-42FB-8EF5-24804CDCE531}.ReleaseVsix|Any CPU.Build.0 = Release|Any CPU
 		{BB58BAE4-8CD9-48E8-BF66-D193912CF687}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BB58BAE4-8CD9-48E8-BF66-D193912CF687}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB58BAE4-8CD9-48E8-BF66-D193912CF687}.DebugVsix|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB58BAE4-8CD9-48E8-BF66-D193912CF687}.DebugVsix|Any CPU.Build.0 = Debug|Any CPU
 		{BB58BAE4-8CD9-48E8-BF66-D193912CF687}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB58BAE4-8CD9-48E8-BF66-D193912CF687}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB58BAE4-8CD9-48E8-BF66-D193912CF687}.ReleaseVsix|Any CPU.ActiveCfg = Release|Any CPU
+		{BB58BAE4-8CD9-48E8-BF66-D193912CF687}.ReleaseVsix|Any CPU.Build.0 = Release|Any CPU
 		{D942394E-BE0E-4DF3-856B-251FB953ADAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D942394E-BE0E-4DF3-856B-251FB953ADAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D942394E-BE0E-4DF3-856B-251FB953ADAC}.DebugVsix|Any CPU.ActiveCfg = Debug|Any CPU
+		{D942394E-BE0E-4DF3-856B-251FB953ADAC}.DebugVsix|Any CPU.Build.0 = Debug|Any CPU
 		{D942394E-BE0E-4DF3-856B-251FB953ADAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D942394E-BE0E-4DF3-856B-251FB953ADAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D942394E-BE0E-4DF3-856B-251FB953ADAC}.ReleaseVsix|Any CPU.ActiveCfg = Release|Any CPU
+		{D942394E-BE0E-4DF3-856B-251FB953ADAC}.ReleaseVsix|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

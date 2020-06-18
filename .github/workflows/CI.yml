@@ -14,22 +14,21 @@ jobs:
     - name: Checkout Git repository
       uses: actions/checkout@v2
 
-    - name: Setup NuGet
-      uses: NuGet/setup-nuget@v1.0.2
-    
-    - name: Setup MSBuild
-      uses: microsoft/setup-msbuild@v1
-    
-    - name: Restore NuGet packages
-      run: nuget restore src/CleanCodeHelper.sln
-  
-    - name: Build Solution
-      run: msbuild src/CleanCodeHelper.sln /p:Configuration=Release
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.x
 
-    - name: Execute Unit Tests
-      run: dotnet test src -l "console;verbosity=detailed" --collect "Code Coverage" --configuration Release
+    - name: Install dependencies
+      run: dotnet restore src
 
-    - name: Upload NuGet package
+    - name: Build
+      run: dotnet build src --configuration Release --no-restore
+
+    - name: Test
+      run: dotnet test src --configuration Release --no-restore --verbosity normal --collect "Code Coverage"
+
+    - name: Publish NuGet package as Artifact
       uses: actions/upload-artifact@v2
       with:
         path: 'src/**/*.nupkg'
