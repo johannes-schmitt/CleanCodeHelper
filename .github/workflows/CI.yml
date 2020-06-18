@@ -46,8 +46,6 @@ jobs:
       run: echo ${{ steps.unit_tests.outputs.coverage_file }}
 
     - uses: codecov/codecov-action@v1
-      with:
-        #file: ${{ steps.unit_tests.outputs.coverage_file }}
 
     - name: Publish NuGet package as artifact
       uses: actions/upload-artifact@v2
