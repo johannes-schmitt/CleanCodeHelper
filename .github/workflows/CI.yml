@@ -27,7 +27,7 @@ jobs:
       run: msbuild src/CleanCodeHelper.sln /p:Configuration=Release
 
     - name: Download NuGet Console Runner
-      run: install NUnit.Console -OutputDirectory NUnit.Console -Version 3.11.1
+      run: nuget install NUnit.Console -OutputDirectory NUnit.Console -Version 3.11.1
 
     - name: Execute Unit Tests
       run: NUnit.Console/NUnit.ConsoleRunner.3.11.1/tools/nunit3-console.exe src/CleanCodeHelper/CleanCodeHelper.Analyzer.Test/bin/Release/netcoreapp3.1/CleanCodeHelper.Analyzer.Test.dll
