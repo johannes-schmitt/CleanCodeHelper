@@ -19,16 +19,16 @@ jobs:
       with:
         dotnet-version: 3.1.x
 
-    - name: Install dependencies
+    - name: Restore NuGet packages
       run: dotnet restore src
 
     - name: Build
       run: dotnet build src --configuration Release --no-restore
 
-    - name: Test
-      run: dotnet test src --configuration Release --no-restore --verbosity normal --collect "Code Coverage"
+    - name: Run unit tests
+      run: dotnet test src --configuration Release --no-restore --verbosity normal --collect "XPlat Code Coverage"
 
-    - name: Publish NuGet package as Artifact
+    - name: Publish NuGet package as artifact
       uses: actions/upload-artifact@v2
       with:
         path: 'src/**/*.nupkg'
