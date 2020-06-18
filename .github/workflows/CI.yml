@@ -27,7 +27,7 @@ jobs:
       run: msbuild src/CleanCodeHelper.sln /p:Configuration=Release
 
     - name: Execute Unit Tests
-      run: dotnet test -l "console;verbosity=detailed" --collect "Code Coverage"
+      run: dotnet test src -l "console;verbosity=detailed" --collect "Code Coverage" --configuration Release
 
     - name: Upload NuGet package
       uses: actions/upload-artifact@v2
