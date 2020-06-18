@@ -12,10 +12,13 @@ jobs:
 
     steps:
     - name: temp set variable
-      run: echo '::set-env name=SOME_VAR::hello_world'
+      id: vars
+      shell: pwsh
+      run: echo "::set-output name=SOME_VAR::hello_world"
 
     - name: temp print variable
-      run: echo 'The variable  is' $hello_world
+      shell: pwsh
+      run: echo ${{ steps.vars.outputs.SOME_VAR }}
 
     - name: Checkout Git repository
       uses: actions/checkout@v2
@@ -33,6 +36,17 @@ jobs:
 
     - name: Run unit tests
       run: dotnet test src --configuration Release --no-restore --verbosity normal --collect "XPlat Code Coverage"
+
+    - name: temp set variable 2
+      id: vars2
+      shell: pwsh
+      run: |
+        $coverage_file = Get-ChildItem -Path .\src -Filter coverage.cobertura.xml -Recurse | Select-Object -first 1
+        echo "::set-output name=COVERAGE_FILE::$coverage_file.FullName"
+
+    - name: temp print variable 2
+      shell: pwsh
+      run: echo ${{ steps.vars2.outputs.COVERAGE_FILE }}
 
     - name: Publish NuGet package as artifact
       uses: actions/upload-artifact@v2
