@@ -35,18 +35,15 @@ jobs:
       run: dotnet build src --configuration Release --no-restore
 
     - name: Run unit tests
-      run: dotnet test src --configuration Release --no-restore --verbosity normal --collect "XPlat Code Coverage"
-
-    - name: temp set variable 2
-      id: vars2
-      shell: pwsh
+      id: unit_tests
       run: |
+        dotnet test src --configuration Release --no-restore --verbosity normal --collect "XPlat Code Coverage"
         $coverage_file = Get-ChildItem -Path .\src -Filter coverage.cobertura.xml -Recurse | Select-Object -first 1
-        echo "::set-output name=COVERAGE_FILE::$coverage_file.FullName"
+        echo "::set-output name=coverage_file::$coverage_file"
 
     - name: temp print variable 2
       shell: pwsh
-      run: echo ${{ steps.vars2.outputs.COVERAGE_FILE }}
+      run: echo ${{ steps.unit_tests.outputs.coverage_file }}
 
     - name: Publish NuGet package as artifact
       uses: actions/upload-artifact@v2
