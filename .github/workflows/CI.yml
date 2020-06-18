@@ -11,15 +11,6 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - name: temp set variable
-      id: vars
-      shell: pwsh
-      run: echo "::set-output name=SOME_VAR::hello_world"
-
-    - name: temp print variable
-      shell: pwsh
-      run: echo ${{ steps.vars.outputs.SOME_VAR }}
-
     - name: Checkout Git repository
       uses: actions/checkout@v2
 
@@ -41,11 +32,8 @@ jobs:
         $coverage_file = Get-ChildItem -Path .\src -Filter coverage.cobertura.xml -Recurse | Select-Object -first 1
         echo "::set-output name=coverage_file::$coverage_file"
 
-    - name: temp print variable 2
-      shell: pwsh
-      run: echo ${{ steps.unit_tests.outputs.coverage_file }}
-
-    - uses: codecov/codecov-action@v1
+    - name: Publish code coverage to codecov.io
+      uses: codecov/codecov-action@v1
 
     - name: Publish NuGet package as artifact
       uses: actions/upload-artifact@v2
