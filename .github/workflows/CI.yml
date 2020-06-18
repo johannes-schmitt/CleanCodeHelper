@@ -11,6 +11,12 @@ jobs:
     runs-on: windows-latest
 
     steps:
+    - name: temp set variable
+      run: echo '::set-env name=SOME_VAR::hello_world'
+
+    - name: temp print variable
+      run: echo 'The variable  is' $hello_world
+
     - name: Checkout Git repository
       uses: actions/checkout@v2
 
@@ -27,12 +33,6 @@ jobs:
 
     - name: Run unit tests
       run: dotnet test src --configuration Release --no-restore --verbosity normal --collect "XPlat Code Coverage"
-
-    - name: temp set variable
-      run: echo ::set-env name=SOME_VAR::$(dir /B /S *coverage.cobertura.xml)
-
-    - name: temp print variable
-      run: echo ${{ env.SOME_VAR }}
 
     - name: Publish NuGet package as artifact
       uses: actions/upload-artifact@v2
