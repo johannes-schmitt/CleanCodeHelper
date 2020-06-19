@@ -9,6 +9,8 @@ on:
 jobs:
   build:
     runs-on: windows-latest
+    env:
+      SOURCE_DIR: src
 
     steps:
     - name: Checkout Git repository
@@ -20,20 +22,20 @@ jobs:
         dotnet-version: 3.1.x
 
     - name: Restore NuGet packages
-      run: dotnet restore src
+      run: dotnet restore ${env:SOURCE_DIR}
 
     - name: Build
       id: build
       run: |
-        dotnet build src --configuration Release --no-restore
-        $nuget_package_path = Get-ChildItem -Path .\src -Filter *.nupkg -Recurse | Select-Object -first 1
+        dotnet build ${env:PATH} --configuration Release --no-restore
+        $nuget_package_path = Get-ChildItem -Path ${env:SOURCE_DIR} -Filter *.nupkg -Recurse | Select-Object -first 1
         $nuget_package_name = [System.IO.Path]::GetFileName($nuget_package_path)
         echo "::set-output name=nuget_package_path::$nuget_package_path"
         echo "::set-output name=nuget_package_name::$nuget_package_name"
 
     - name: Run unit tests
       id: unit_tests
-      run: dotnet test src --configuration Release --no-restore --verbosity normal --collect "XPlat Code Coverage"
+      run: dotnet test ${env:SOURCE_DIR} --configuration Release --no-restore --verbosity normal --collect "XPlat Code Coverage"
 
     - name: Publish code coverage to codecov.io
       uses: codecov/codecov-action@v1
