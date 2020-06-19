@@ -23,14 +23,14 @@ jobs:
 
     - name: Restore NuGet packages
       shell: pwsh
-      run: dotnet restore ${env:SOURCE_DIR}
+      run: dotnet restore $env:SOURCE_DIR
 
     - name: Build
       shell: pwsh
       id: build
       run: |
-        dotnet build ${env:PATH} --configuration Release --no-restore
-        $nuget_package_path = Get-ChildItem -Path ${env:SOURCE_DIR} -Filter *.nupkg -Recurse | Select-Object -first 1
+        dotnet build $env:SOURCE_DIR --configuration Release --no-restore
+        $nuget_package_path = Get-ChildItem -Path $env:SOURCE_DIR -Filter *.nupkg -Recurse | Select-Object -first 1
         $nuget_package_name = [System.IO.Path]::GetFileName($nuget_package_path)
         echo "::set-output name=nuget_package_path::$nuget_package_path"
         echo "::set-output name=nuget_package_name::$nuget_package_name"
@@ -38,7 +38,7 @@ jobs:
     - name: Run unit tests
       shell: pwsh
       id: unit_tests
-      run: dotnet test ${env:SOURCE_DIR} --configuration Release --no-restore --verbosity normal --collect "XPlat Code Coverage"
+      run: dotnet test $env:SOURCE_DIR --configuration Release --no-restore --verbosity normal --collect "XPlat Code Coverage"
 
     - name: Publish code coverage to codecov.io
       uses: codecov/codecov-action@v1
