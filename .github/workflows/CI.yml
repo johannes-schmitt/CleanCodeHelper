@@ -27,10 +27,7 @@ jobs:
 
     - name: Run unit tests
       id: unit_tests
-      run: |
-        dotnet test src --configuration Release --no-restore --verbosity normal --collect "XPlat Code Coverage"
-        $coverage_file = Get-ChildItem -Path .\src -Filter coverage.cobertura.xml -Recurse | Select-Object -first 1
-        echo "::set-output name=coverage_file::$coverage_file"
+      run: dotnet test src --configuration Release --no-restore --verbosity normal --collect "XPlat Code Coverage"
 
     - name: Publish code coverage to codecov.io
       uses: codecov/codecov-action@v1
