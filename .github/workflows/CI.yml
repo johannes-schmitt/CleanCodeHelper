@@ -22,9 +22,11 @@ jobs:
         dotnet-version: 3.1.x
 
     - name: Restore NuGet packages
+      shell: pwsh
       run: dotnet restore ${env:SOURCE_DIR}
 
     - name: Build
+      shell: pwsh
       id: build
       run: |
         dotnet build ${env:PATH} --configuration Release --no-restore
@@ -34,6 +36,7 @@ jobs:
         echo "::set-output name=nuget_package_name::$nuget_package_name"
 
     - name: Run unit tests
+      shell: pwsh
       id: unit_tests
       run: dotnet test ${env:SOURCE_DIR} --configuration Release --no-restore --verbosity normal --collect "XPlat Code Coverage"
 
