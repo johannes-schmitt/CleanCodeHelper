@@ -23,7 +23,13 @@ jobs:
       run: dotnet restore src
 
     - name: Build
-      run: dotnet build src --configuration Release --no-restore
+      id: build
+      run: |
+        dotnet build src --configuration Release --no-restore
+        $nuget_package_path = Get-ChildItem -Path .\src -Filter *.nupkg -Recurse | Select-Object -first 1
+        $nuget_package_name = [System.IO.Path]::GetFileName($nuget_package_path)
+        echo "::set-output name=nuget_package_path::$nuget_package_path"
+        echo "::set-output name=nuget_package_name::$nuget_package_name"
 
     - name: Run unit tests
       id: unit_tests
@@ -37,4 +43,5 @@ jobs:
     - name: Publish NuGet package as artifact
       uses: actions/upload-artifact@v2
       with:
-        path: 'src/**/*.nupkg'
+        name: ${{ steps.build.outputs.nuget_package_name }}
+        path: ${{ steps.build.outputs.nuget_package_path }}
