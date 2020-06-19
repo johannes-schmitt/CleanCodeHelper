@@ -11,6 +11,7 @@ jobs:
     runs-on: windows-latest
     env:
       SOURCE_DIR: src
+      BUILD_CONFIG: Release
 
     steps:
     - name: Checkout Git repository
@@ -29,7 +30,7 @@ jobs:
       shell: pwsh
       id: build
       run: |
-        dotnet build $env:SOURCE_DIR --configuration Release --no-restore
+        dotnet build $env:SOURCE_DIR --configuration $env:BUILD_CONFIG --no-restore
         $nuget_package_path = Get-ChildItem -Path $env:SOURCE_DIR -Filter *.nupkg -Recurse | Select-Object -first 1
         $nuget_package_name = [System.IO.Path]::GetFileName($nuget_package_path)
         echo "::set-output name=nuget_package_path::$nuget_package_path"
@@ -38,7 +39,7 @@ jobs:
     - name: Run unit tests
       shell: pwsh
       id: unit_tests
-      run: dotnet test $env:SOURCE_DIR --configuration Release --no-restore --verbosity normal --collect "XPlat Code Coverage"
+      run: dotnet test $env:SOURCE_DIR --configuration $env:BUILD_CONFIG --no-restore --verbosity normal --collect "XPlat Code Coverage"
 
     - name: Publish code coverage to codecov.io
       uses: codecov/codecov-action@v1
