@@ -140,7 +140,8 @@ namespace CleanCodeHelper.Analyzer
                 SyntaxKind.ForEachStatement,
                 SyntaxKind.TryStatement,
                 SyntaxKind.LockStatement,
-                SyntaxKind.SwitchStatement
+                SyntaxKind.SwitchStatement,
+                SyntaxKind.SwitchExpression
             };
 
             private readonly List<SyntaxNode> _nestingStatements = new List<SyntaxNode>();
