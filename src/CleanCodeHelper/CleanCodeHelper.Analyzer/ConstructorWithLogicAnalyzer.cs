@@ -1,5 +1,6 @@
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -49,7 +50,20 @@ namespace CleanCodeHelper.Analyzer
 
             public override void Visit(SyntaxNode node)
             {
-                if (node.Kind() == SyntaxKind.IfStatement)
+                var conditionals = new[]
+                {
+                    SyntaxKind.IfStatement,
+                    SyntaxKind.DoStatement,
+                    SyntaxKind.ForEachStatement,
+                    SyntaxKind.ForStatement,
+                    SyntaxKind.IfStatement,
+                    SyntaxKind.SwitchStatement,
+                    SyntaxKind.WhileStatement,
+                    SyntaxKind.ConditionalExpression,
+                    SyntaxKind.SwitchExpression
+                };
+
+                if (conditionals.Contains(node.Kind()))
                 {
                     ContainsConditional = true;
                 }
