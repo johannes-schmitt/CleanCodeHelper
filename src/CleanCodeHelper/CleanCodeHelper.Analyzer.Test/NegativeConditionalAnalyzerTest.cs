@@ -7,7 +7,7 @@ namespace CleanCodeHelper.Analyzer.Test
 {
     public class NegativeConditionalAnalyzerTest
     {
-        [Test, LoadSourceFilesFrom("TestData\\NegativeConditionalAnalyzer")]
+        [Test, LoadSourceFilesFrom("TestData\\" + nameof(NegativeConditionalAnalyzer))]
         public async Task Verify(AnnotatedSourceFile sourceFile)
         {
             await sourceFile.VerifyAsync<NegativeConditionalAnalyzer>();
