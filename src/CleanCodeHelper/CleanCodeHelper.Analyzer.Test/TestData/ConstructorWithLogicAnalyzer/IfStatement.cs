@@ -3,10 +3,10 @@ using CleanCodeHelper.Analyzer.Test.Helper;
 
 namespace CleanCodeHelper.Analyzer.Test.TestData.ConstructorWithLogicAnalyzer
 {
-    [ExpectedDiagnostic("CC0005", Arguments = new object[] { nameof(ConstructorWithIfStatement) }, Line = 9, Column = 16)]
-    public class ConstructorWithIfStatement
+    [ExpectedDiagnostic("CC0005", Arguments = new object[] { nameof(IfStatement) }, Line = 9, Column = 16)]
+    public class IfStatement
     {
-        public ConstructorWithIfStatement()
+        public IfStatement()
         {
             if (new Random().Next() % 2 == 0)
             {

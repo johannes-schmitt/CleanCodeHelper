@@ -3,11 +3,11 @@
 namespace CleanCodeHelper.Analyzer.Test.TestData.ConstructorWithLogicAnalyzer
 {
     [NoExpectedDiagnostic]
-    public class ConstructorWithoutConditionals
+    public class WithoutConditionals
     {
         private int _someValue;
 
-        public ConstructorWithoutConditionals(int someValue)
+        public WithoutConditionals(int someValue)
         {
             _someValue = someValue;
         }

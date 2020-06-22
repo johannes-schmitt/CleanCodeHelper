@@ -4,10 +4,10 @@ using CleanCodeHelper.Analyzer.Test.Helper;
 
 namespace CleanCodeHelper.Analyzer.Test.TestData.ConstructorWithLogicAnalyzer
 {
-    [ExpectedDiagnostic("CC0005", Arguments = new object[] { nameof(ConstructorWithForEachStatement) }, Line = 10, Column = 16)]
-    public class ConstructorWithForEachStatement
+    [ExpectedDiagnostic("CC0005", Arguments = new object[] { nameof(ForEachStatement) }, Line = 10, Column = 16)]
+    public class ForEachStatement
     {
-        public ConstructorWithForEachStatement()
+        public ForEachStatement()
         {
             foreach (var _ in Enumerable.Range(0, 10))
             {
