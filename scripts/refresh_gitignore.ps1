@@ -1,0 +1,1 @@
+Invoke-WebRequest "https://raw.githubusercontent.com/github/gitignore/master/VisualStudio.gitignore" -OutFile ..\.gitignore
