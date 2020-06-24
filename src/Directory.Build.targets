@@ -1,4 +1,8 @@
 <Project>
+  <PropertyGroup>
+   <LangVersion>latest</LangVersion>
+ </PropertyGroup>
+
   <Choose>
     <When Condition="$(AvoidCycleErrorOnSelfReference) == 'True'">
       <PropertyGroup>
