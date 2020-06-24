@@ -121,14 +121,14 @@ namespace CleanCodeHelper.Analyzer
 
             private static bool ViolatesRule(SyntaxNode node)
             {
-                var nestingStatements = SyntaxKindFinder.Find(node, IndentationCausingSyntaxKinds);
+                var nestingStatements = SyntaxKindFinder.Find(node, ignoreLocalFunctions: true, IndentationCausingSyntaxKinds);
 
                 return nestingStatements.SelectMany(syntaxNode => syntaxNode.ChildNodes()).Any(ContainsNestedStatements);
             }
 
             private static bool ContainsNestedStatements(SyntaxNode node)
             {
-                return SyntaxKindFinder.Find(node, IndentationCausingSyntaxKinds).Any();
+                return SyntaxKindFinder.Find(node, ignoreLocalFunctions: true, IndentationCausingSyntaxKinds).Any();
             }
         }
     }

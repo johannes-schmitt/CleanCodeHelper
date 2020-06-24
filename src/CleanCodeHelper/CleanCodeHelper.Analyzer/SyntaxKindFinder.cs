@@ -7,9 +7,9 @@ namespace CleanCodeHelper.Analyzer
 {
     public static class SyntaxKindFinder
     {
-        public static IEnumerable<SyntaxNode> Find(SyntaxNode node, params SyntaxKind[] syntaxKinds)
+        public static IEnumerable<SyntaxNode> Find(SyntaxNode node, bool ignoreLocalFunctions, params SyntaxKind[] syntaxKinds)
         {
-            var syntaxWalker = new SyntaxWalker(syntaxKinds);
+            var syntaxWalker = new SyntaxWalker(ignoreLocalFunctions, syntaxKinds);
             syntaxWalker.Visit(node);
 
             return syntaxWalker.FoundNodes;
@@ -19,10 +19,12 @@ namespace CleanCodeHelper.Analyzer
         {
             private SyntaxNode _root;
 
+            private readonly bool _ignoreLocalFunctions;
             private readonly SyntaxKind[] _syntaxKinds;
 
-            public SyntaxWalker(SyntaxKind[] syntaxKinds)
+            public SyntaxWalker(bool ignoreLocalFunctions, SyntaxKind[] syntaxKinds)
             {
+                _ignoreLocalFunctions = ignoreLocalFunctions;
                 _syntaxKinds = syntaxKinds;
             }
 
@@ -34,7 +36,10 @@ namespace CleanCodeHelper.Analyzer
             {
                 _root ??= node;
 
-                if ((IsRoot(node) || !IsInLocalFunction(node)) && _syntaxKinds.Contains(node.Kind()))
+                if (_ignoreLocalFunctions && !IsRoot(node) && IsInLocalFunction(node))
+                {
+                }
+                else if (_syntaxKinds.Contains(node.Kind()))
                 {
                     _foundNodes.Add(node);
                 }

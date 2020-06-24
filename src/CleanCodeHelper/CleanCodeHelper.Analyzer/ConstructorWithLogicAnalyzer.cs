@@ -46,7 +46,7 @@ namespace CleanCodeHelper.Analyzer
 
             var constructor = (ConstructorDeclarationSyntax)context.Node;
 
-            if (SyntaxKindFinder.Find(constructor, conditionals).Any())
+            if (SyntaxKindFinder.Find(constructor, ignoreLocalFunctions: false, conditionals).Any())
             {
                 var location = constructor.Identifier.GetLocation();
                 var diagnostic = Diagnostic.Create(Rule, location, constructor.Identifier);
