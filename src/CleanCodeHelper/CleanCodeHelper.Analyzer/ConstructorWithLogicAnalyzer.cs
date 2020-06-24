@@ -29,46 +29,28 @@ namespace CleanCodeHelper.Analyzer
             context.RegisterSyntaxNodeAction(AnalyzeConstructor, SyntaxKind.ConstructorDeclaration);
         }
 
-        private void AnalyzeConstructor(SyntaxNodeAnalysisContext context)
+        private static void AnalyzeConstructor(SyntaxNodeAnalysisContext context)
         {
+            var conditionals = new[]
+            {
+                SyntaxKind.IfStatement,
+                SyntaxKind.DoStatement,
+                SyntaxKind.ForEachStatement,
+                SyntaxKind.ForStatement,
+                SyntaxKind.IfStatement,
+                SyntaxKind.SwitchStatement,
+                SyntaxKind.WhileStatement,
+                SyntaxKind.ConditionalExpression,
+                SyntaxKind.SwitchExpression
+            };
+
             var constructor = (ConstructorDeclarationSyntax)context.Node;
 
-            var conditionalsFinder = new ConditionalsFinder();
-            conditionalsFinder.Visit(constructor);
-
-            if (conditionalsFinder.ContainsConditional)
+            if (SyntaxKindFinder.Find(constructor, conditionals).Any())
             {
                 var location = constructor.Identifier.GetLocation();
                 var diagnostic = Diagnostic.Create(Rule, location, constructor.Identifier);
                 context.ReportDiagnostic(diagnostic);
-            }
-        }
-
-        private class ConditionalsFinder : CSharpSyntaxWalker
-        {
-            public bool ContainsConditional { get; private set; }
-
-            public override void Visit(SyntaxNode node)
-            {
-                var conditionals = new[]
-                {
-                    SyntaxKind.IfStatement,
-                    SyntaxKind.DoStatement,
-                    SyntaxKind.ForEachStatement,
-                    SyntaxKind.ForStatement,
-                    SyntaxKind.IfStatement,
-                    SyntaxKind.SwitchStatement,
-                    SyntaxKind.WhileStatement,
-                    SyntaxKind.ConditionalExpression,
-                    SyntaxKind.SwitchExpression
-                };
-
-                if (conditionals.Contains(node.Kind()))
-                {
-                    ContainsConditional = true;
-                }
-
-                base.Visit(node);
             }
         }
     }

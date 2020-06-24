@@ -66,6 +66,21 @@ namespace CleanCodeHelper.Analyzer
 
         private class ViolationsFinder : CSharpSyntaxWalker
         {
+            private static readonly SyntaxKind[] IndentationCausingSyntaxKinds =
+            {
+                SyntaxKind.IfStatement,
+                SyntaxKind.ForStatement,
+                SyntaxKind.ForEachStatement,
+                SyntaxKind.DoStatement,
+                SyntaxKind.WhileStatement,
+                SyntaxKind.UsingStatement,
+                SyntaxKind.ForEachStatement,
+                SyntaxKind.TryStatement,
+                SyntaxKind.LockStatement,
+                SyntaxKind.SwitchStatement,
+                SyntaxKind.SwitchExpression
+            };
+
             private readonly List<MethodDeclarationSyntax> _methodViolations = new List<MethodDeclarationSyntax>();
             private readonly List<ConstructorDeclarationSyntax> _constructorViolations = new List<ConstructorDeclarationSyntax>();
             private readonly List<LocalFunctionStatementSyntax> _localFunctionViolations = new List<LocalFunctionStatementSyntax>();
@@ -106,68 +121,14 @@ namespace CleanCodeHelper.Analyzer
 
             private static bool ViolatesRule(SyntaxNode node)
             {
-                var statementWalker = new StatementWalker();
-                statementWalker.Visit(node);
+                var nestingStatements = SyntaxKindFinder.Find(node, IndentationCausingSyntaxKinds);
 
-                return statementWalker.NestingStatements.SelectMany(syntaxNode => syntaxNode.ChildNodes()).Any(ContainsNestedStatements);
+                return nestingStatements.SelectMany(syntaxNode => syntaxNode.ChildNodes()).Any(ContainsNestedStatements);
             }
 
             private static bool ContainsNestedStatements(SyntaxNode node)
             {
-                var childStatementWalker = new StatementWalker();
-                childStatementWalker.Visit(node);
-                if (childStatementWalker.NestingStatements.Any())
-                {
-                    return true;
-                }
-
-                return false;
-            }
-        }
-
-        private class StatementWalker : CSharpSyntaxWalker
-        {
-            private SyntaxNode _root;
-
-            private readonly SyntaxKind[] _statements =
-            {
-                SyntaxKind.IfStatement,
-                SyntaxKind.ForStatement,
-                SyntaxKind.ForEachStatement,
-                SyntaxKind.DoStatement,
-                SyntaxKind.WhileStatement,
-                SyntaxKind.UsingStatement,
-                SyntaxKind.ForEachStatement,
-                SyntaxKind.TryStatement,
-                SyntaxKind.LockStatement,
-                SyntaxKind.SwitchStatement,
-                SyntaxKind.SwitchExpression
-            };
-
-            private readonly List<SyntaxNode> _nestingStatements = new List<SyntaxNode>();
-
-            public IEnumerable<SyntaxNode> NestingStatements => _nestingStatements;
-
-            public override void Visit(SyntaxNode node)
-            {
-                if (_root == null)
-                {
-                    _root = node;
-                }
-
-                if (node.Kind() == SyntaxKind.LocalFunctionStatement &&
-                    node != _root)
-                {
-                    // local functions are analyzed separately
-                    return;
-                }
-
-                if (_statements.Contains(node.Kind()))
-                {
-                    _nestingStatements.Add(node);
-                }
-
-                base.Visit(node);
+                return SyntaxKindFinder.Find(node, IndentationCausingSyntaxKinds).Any();
             }
         }
     }
