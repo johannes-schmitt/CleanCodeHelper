@@ -1,4 +1,7 @@
 ﻿[*.cs]
 
+# Drink own champagne
+dotnet_analyzer_diagnostic.category-CleanCode.severity = error
+
 # RS2008: Enable analyzer release tracking
 dotnet_diagnostic.RS2008.severity = suggestion
