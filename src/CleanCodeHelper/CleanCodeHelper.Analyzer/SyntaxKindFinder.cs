@@ -39,6 +39,10 @@ namespace CleanCodeHelper.Analyzer
                 if (_ignoreLocalFunctions && !IsRoot(node) && IsInLocalFunction(node))
                 {
                 }
+                else if (node.Kind() == SyntaxKind.IfStatement && node.Parent?.Kind() == SyntaxKind.ElseClause)
+                {
+
+                }
                 else if (_syntaxKinds.Contains(node.Kind()))
                 {
                     _foundNodes.Add(node);
