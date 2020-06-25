@@ -17,7 +17,7 @@ namespace CleanCodeHelper.Analyzer
         private static readonly LocalizableString Title = @"Constructors should not contain any conditional logic.";
         private static readonly LocalizableString MessageFormat = @"'{0}' is containing conditional logic.";
 
-        private static readonly DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Title, MessageFormat, Categories.Maintainability, DiagnosticSeverity.Warning, isEnabledByDefault: true);
+        private static readonly DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Title, MessageFormat, Categories.CleanCode, DiagnosticSeverity.Warning, isEnabledByDefault: true);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 

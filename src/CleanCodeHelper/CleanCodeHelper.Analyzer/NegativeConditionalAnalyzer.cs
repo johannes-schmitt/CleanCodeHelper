@@ -18,7 +18,7 @@ namespace CleanCodeHelper.Analyzer
         private static readonly LocalizableString Title = @"Conditionals should be expressed as positives.";
         private static readonly LocalizableString MessageFormat = @"'{0}' is expressing a negative conditional.";
 
-        private static readonly DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Title, MessageFormat, Categories.Maintainability, DiagnosticSeverity.Warning, isEnabledByDefault: true);
+        private static readonly DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Title, MessageFormat, Categories.CleanCode, DiagnosticSeverity.Warning, isEnabledByDefault: true);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 

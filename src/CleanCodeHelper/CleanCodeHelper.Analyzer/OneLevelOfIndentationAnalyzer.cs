@@ -21,9 +21,9 @@ namespace CleanCodeHelper.Analyzer
         private static readonly LocalizableString LocalFunctionTitle = @"Use one level of indentation per local function.";
         private static readonly LocalizableString MessageFormat = @"'{0}' contains more than 1 level of indentation.";
 
-        private static readonly DiagnosticDescriptor MethodRule = new DiagnosticDescriptor(MethodDiagnosticId, MethodTitle, MessageFormat, Categories.Maintainability, DiagnosticSeverity.Warning, isEnabledByDefault: true);
-        private static readonly DiagnosticDescriptor ConstructorRule = new DiagnosticDescriptor(ConstructorDiagnosticId, ConstructorTitle, MessageFormat, Categories.Maintainability, DiagnosticSeverity.Warning, isEnabledByDefault: true);
-        private static readonly DiagnosticDescriptor LocalFunctionRule = new DiagnosticDescriptor(LocalFunctionDiagnosticId, LocalFunctionTitle, MessageFormat, Categories.Maintainability, DiagnosticSeverity.Warning, isEnabledByDefault: true);
+        private static readonly DiagnosticDescriptor MethodRule = new DiagnosticDescriptor(MethodDiagnosticId, MethodTitle, MessageFormat, Categories.CleanCode, DiagnosticSeverity.Warning, isEnabledByDefault: true);
+        private static readonly DiagnosticDescriptor ConstructorRule = new DiagnosticDescriptor(ConstructorDiagnosticId, ConstructorTitle, MessageFormat, Categories.CleanCode, DiagnosticSeverity.Warning, isEnabledByDefault: true);
+        private static readonly DiagnosticDescriptor LocalFunctionRule = new DiagnosticDescriptor(LocalFunctionDiagnosticId, LocalFunctionTitle, MessageFormat, Categories.CleanCode, DiagnosticSeverity.Warning, isEnabledByDefault: true);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(MethodRule, ConstructorRule, LocalFunctionRule);
 

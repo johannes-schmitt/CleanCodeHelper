@@ -2,6 +2,6 @@
 {
     public static class Categories
     {
-        public const string Maintainability = "Maintainability";
+        public const string CleanCode = "CleanCode";
     }
 }
