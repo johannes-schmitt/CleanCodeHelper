@@ -12,7 +12,7 @@
     <PackageId>CleanCodeHelper.Analyzer</PackageId>
     <Title>Clean Code Helper</Title>
     <Description>Clean Code Helper</Description>
-    <VersionPrefix>0.0.3</VersionPrefix>
+    <VersionPrefix>0.0.4</VersionPrefix>
     <VersionSuffix></VersionSuffix>
     <Authors>Johannes Schmitt</Authors>
     <Copyright>Johannes Schmitt</Copyright>
@@ -27,7 +27,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CleanCodeHelper.Analyzer" Version="0.0.2">
+    <PackageReference Include="CleanCodeHelper.Analyzer" Version="0.0.3">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.0.0">
