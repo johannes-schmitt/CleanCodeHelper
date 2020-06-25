@@ -66,21 +66,6 @@ namespace CleanCodeHelper.Analyzer
 
         private class ViolationsFinder : CSharpSyntaxWalker
         {
-            private static readonly SyntaxKind[] IndentationCausingSyntaxKinds =
-            {
-                SyntaxKind.IfStatement,
-                SyntaxKind.ForStatement,
-                SyntaxKind.ForEachStatement,
-                SyntaxKind.DoStatement,
-                SyntaxKind.WhileStatement,
-                SyntaxKind.UsingStatement,
-                SyntaxKind.ForEachStatement,
-                SyntaxKind.TryStatement,
-                SyntaxKind.LockStatement,
-                SyntaxKind.SwitchStatement,
-                SyntaxKind.SwitchExpression
-            };
-
             private readonly List<MethodDeclarationSyntax> _methodViolations = new List<MethodDeclarationSyntax>();
             private readonly List<ConstructorDeclarationSyntax> _constructorViolations = new List<ConstructorDeclarationSyntax>();
             private readonly List<LocalFunctionStatementSyntax> _localFunctionViolations = new List<LocalFunctionStatementSyntax>();
@@ -121,14 +106,102 @@ namespace CleanCodeHelper.Analyzer
 
             private static bool ViolatesRule(SyntaxNode node)
             {
-                var nestingStatements = SyntaxKindFinder.Find(node, ignoreLocalFunctions: true, IndentationCausingSyntaxKinds);
+                var nestingStatements = IndentationCausingNodesFinder.Find(node);
 
                 return nestingStatements.SelectMany(syntaxNode => syntaxNode.ChildNodes()).Any(ContainsNestedStatements);
             }
 
             private static bool ContainsNestedStatements(SyntaxNode node)
             {
-                return SyntaxKindFinder.Find(node, ignoreLocalFunctions: true, IndentationCausingSyntaxKinds).Any();
+                return IndentationCausingNodesFinder.Find(node).Any();
+            }
+        }
+
+        private static class IndentationCausingNodesFinder
+        {
+            public static IEnumerable<SyntaxNode> Find(SyntaxNode node)
+            {
+                var syntaxWalker = new SyntaxWalker();
+                syntaxWalker.Visit(node);
+
+                return syntaxWalker.FoundNodes;
+            }
+
+            private class SyntaxWalker : CSharpSyntaxWalker
+            {
+                private SyntaxNode _root;
+                private static readonly SyntaxKind[] IndentationCausingSyntaxKinds =
+                {
+                    SyntaxKind.IfStatement,
+                    SyntaxKind.ForStatement,
+                    SyntaxKind.ForEachStatement,
+                    SyntaxKind.DoStatement,
+                    SyntaxKind.WhileStatement,
+                    SyntaxKind.UsingStatement,
+                    SyntaxKind.ForEachStatement,
+                    SyntaxKind.TryStatement,
+                    SyntaxKind.LockStatement,
+                    SyntaxKind.SwitchStatement,
+                    SyntaxKind.SwitchExpression
+                };
+
+                private readonly List<SyntaxNode> _foundNodes = new List<SyntaxNode>();
+
+                public IEnumerable<SyntaxNode> FoundNodes => _foundNodes;
+
+                public override void Visit(SyntaxNode node)
+                {
+                    _root ??= node;
+
+                    if (!IsRoot(node) && IsInLocalFunction(node))
+                    {
+                    }
+                    else if (IsElseIf(node))
+                    {
+                    }
+                    else if (CausesIndentation(node))
+                    {
+                        _foundNodes.Add(node);
+                    }
+
+                    base.Visit(node);
+                }
+
+                private static bool CausesIndentation(SyntaxNode node)
+                {
+                    return IndentationCausingSyntaxKinds.Contains(node.Kind());
+                }
+
+                private static bool IsElseIf(SyntaxNode node)
+                {
+                    return node.Kind() == SyntaxKind.IfStatement && node.Parent?.Kind() == SyntaxKind.ElseClause;
+                }
+
+                private bool IsInLocalFunction(SyntaxNode node)
+                {
+                    var parent = node.Parent;
+                    if (parent == null)
+                    {
+                        return false;
+                    }
+
+                    if (IsRoot(parent))
+                    {
+                        return false;
+                    }
+
+                    if (parent.Kind() == SyntaxKind.LocalFunctionStatement)
+                    {
+                        return true;
+                    }
+
+                    return IsInLocalFunction(parent);
+                }
+
+                private bool IsRoot(SyntaxNode node)
+                {
+                    return node == _root;
+                }
             }
         }
     }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -31,26 +32,54 @@ namespace CleanCodeHelper.Analyzer
 
         private static void AnalyzeConstructor(SyntaxNodeAnalysisContext context)
         {
-            var conditionals = new[]
-            {
-                SyntaxKind.IfStatement,
-                SyntaxKind.DoStatement,
-                SyntaxKind.ForEachStatement,
-                SyntaxKind.ForStatement,
-                SyntaxKind.IfStatement,
-                SyntaxKind.SwitchStatement,
-                SyntaxKind.WhileStatement,
-                SyntaxKind.ConditionalExpression,
-                SyntaxKind.SwitchExpression
-            };
-
             var constructor = (ConstructorDeclarationSyntax)context.Node;
 
-            if (SyntaxKindFinder.Find(constructor, ignoreLocalFunctions: false, conditionals).Any())
+            if (ConditionalsFinder.Find(constructor).Any())
             {
                 var location = constructor.Identifier.GetLocation();
                 var diagnostic = Diagnostic.Create(Rule, location, constructor.Identifier);
                 context.ReportDiagnostic(diagnostic);
+            }
+        }
+
+        private static class ConditionalsFinder
+        {
+            public static IEnumerable<SyntaxNode> Find(SyntaxNode node)
+            {
+                var syntaxWalker = new SyntaxWalker();
+                syntaxWalker.Visit(node);
+
+                return syntaxWalker.FoundNodes;
+            }
+
+            private class SyntaxWalker : CSharpSyntaxWalker
+            {
+                private readonly SyntaxKind[] _conditionals =
+                {
+                    SyntaxKind.IfStatement,
+                    SyntaxKind.DoStatement,
+                    SyntaxKind.ForEachStatement,
+                    SyntaxKind.ForStatement,
+                    SyntaxKind.IfStatement,
+                    SyntaxKind.SwitchStatement,
+                    SyntaxKind.WhileStatement,
+                    SyntaxKind.ConditionalExpression,
+                    SyntaxKind.SwitchExpression
+                };
+
+                private readonly List<SyntaxNode> _foundNodes = new List<SyntaxNode>();
+
+                public IEnumerable<SyntaxNode> FoundNodes => _foundNodes;
+
+                public override void Visit(SyntaxNode node)
+                {
+                    if (_conditionals.Contains(node.Kind()))
+                    {
+                        _foundNodes.Add(node);
+                    }
+
+                    base.Visit(node);
+                }
             }
         }
     }
