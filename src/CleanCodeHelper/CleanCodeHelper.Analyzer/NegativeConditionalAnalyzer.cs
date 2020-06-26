@@ -23,6 +23,7 @@ namespace CleanCodeHelper.Analyzer
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         [SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "context is never null")]
+        [SuppressMessage("CleanCode", "CC0006:Classes should use the constructor for initialization code.", Justification = "method comes from base class")]
         public override void Initialize(AnalysisContext context)
         {
             context.EnableConcurrentExecution();
