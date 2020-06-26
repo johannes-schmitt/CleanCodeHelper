@@ -3,8 +3,8 @@ using CleanCodeHelper.Analyzer.Test.Helper;
 
 namespace CleanCodeHelper.Analyzer.Test.TestData.TooManyParametersAnalyzerTest
 {
-    [ExpectedDiagnostic("CC0006", Arguments = new object[] { "SomeLocalFunction" }, Line = 14, Column = 25)]
-    [ExpectedDiagnostic("CC0006", Arguments = new object[] { "SomeLocalFunction" }, Line = 25, Column = 25)]
+    [ExpectedDiagnostic("CC0007", Arguments = new object[] { "SomeLocalFunction" }, Line = 14, Column = 25)]
+    [ExpectedDiagnostic("CC0007", Arguments = new object[] { "SomeLocalFunction" }, Line = 25, Column = 25)]
     public class LocalMethodWithMoreThanThreeParameters
     {
         public void SomeMethod4()

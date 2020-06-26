@@ -10,7 +10,7 @@ namespace CleanCodeHelper.Analyzer
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class TooManyParametersAnalyzer : DiagnosticAnalyzer
     {
-        public const string DiagnosticId = "CC0006";
+        public const string DiagnosticId = "CC0007";
 
         private static readonly LocalizableString Title = @"Method contains too many parameters.";
         private static readonly LocalizableString MessageFormat = @"'{0}' contains more than 3 parameters.";
