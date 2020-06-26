@@ -31,45 +31,23 @@ namespace CleanCodeHelper.Analyzer
 
         private static void AnalyzeSyntaxNode(SyntaxNodeAnalysisContext context)
         {
-            switch (context.Node)
-            {
-                case MethodDeclarationSyntax method:
-                    AnalyzeMethod(method, context);
-                    break;
-                case LocalFunctionStatementSyntax localFunction:
-                    AnalyzeLocalFunction(localFunction, context);
-                    break;
-            }
+            var methodLikeSyntax = context.Node;
+            Analyze(methodLikeSyntax, context);
         }
 
-        private static void AnalyzeMethod(MethodDeclarationSyntax method, SyntaxNodeAnalysisContext context)
+        private static void Analyze(dynamic methodLikeSyntax, SyntaxNodeAnalysisContext context)
         {
-            if (HasTooManyParameters(method))
+            if (HasTooManyParameters(methodLikeSyntax))
             {
-                var location = method.Identifier.GetLocation();
-                var diagnostic = Diagnostic.Create(Rule, location, method.Identifier);
+                var location = methodLikeSyntax.Identifier.GetLocation();
+                var diagnostic = Diagnostic.Create(Rule, location, methodLikeSyntax.Identifier);
                 context.ReportDiagnostic(diagnostic);
             }
         }
 
-        private static void AnalyzeLocalFunction(LocalFunctionStatementSyntax localFunction, SyntaxNodeAnalysisContext context)
-        {
-            if (HasTooManyParameters(localFunction))
-            {
-                var location = localFunction.Identifier.GetLocation();
-                var diagnostic = Diagnostic.Create(Rule, location, localFunction.Identifier);
-                context.ReportDiagnostic(diagnostic);
-            }
-        }
-
-        private static bool HasTooManyParameters(BaseMethodDeclarationSyntax method)
+        private static bool HasTooManyParameters(dynamic method)
         {
             return IsTooLong(method.ParameterList);
-        }
-
-        private static bool HasTooManyParameters(LocalFunctionStatementSyntax localFunction)
-        {
-            return IsTooLong(localFunction.ParameterList);
         }
 
         private static bool IsTooLong(BaseParameterListSyntax parameterListSyntax)
