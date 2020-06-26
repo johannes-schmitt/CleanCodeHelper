@@ -10,12 +10,12 @@ using Microsoft.CodeAnalysis.Diagnostics;
 namespace CleanCodeHelper.Analyzer
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class ConstructorContainsLogicAnalyzer : DiagnosticAnalyzer
+    public class ConstructorContainsControlFlowAnalyzer : DiagnosticAnalyzer
     {
         public const string DiagnosticId = "CC0005";
 
-        private static readonly LocalizableString Title = @"Constructors should not contain any conditional logic.";
-        private static readonly LocalizableString MessageFormat = @"'{0}' is containing conditional logic.";
+        private static readonly LocalizableString Title = @"Constructors should not contain any control flow.";
+        private static readonly LocalizableString MessageFormat = @"'{0}' contains control flow.";
 
         private static readonly DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Title, MessageFormat, Categories.CleanCode, DiagnosticSeverity.Warning, isEnabledByDefault: true);
 

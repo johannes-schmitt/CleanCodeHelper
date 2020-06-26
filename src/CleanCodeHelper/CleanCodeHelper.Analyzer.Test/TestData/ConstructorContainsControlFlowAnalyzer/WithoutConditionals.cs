@@ -1,6 +1,6 @@
 ﻿using CleanCodeHelper.Analyzer.Test.Helper;
 
-namespace CleanCodeHelper.Analyzer.Test.TestData.ConstructorContainsLogicAnalyzer
+namespace CleanCodeHelper.Analyzer.Test.TestData.ConstructorContainsControlFlowAnalyzer
 {
     [NoExpectedDiagnostic]
     public class WithoutConditionals

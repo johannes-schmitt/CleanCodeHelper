@@ -2,7 +2,7 @@
 using System.Linq;
 using CleanCodeHelper.Analyzer.Test.Helper;
 
-namespace CleanCodeHelper.Analyzer.Test.TestData.ConstructorContainsLogicAnalyzer
+namespace CleanCodeHelper.Analyzer.Test.TestData.ConstructorContainsControlFlowAnalyzer
 {
     [ExpectedDiagnostic("CC0005", Arguments = new object[] { nameof(ForEachStatement) }, Line = 10, Column = 16)]
     public class ForEachStatement

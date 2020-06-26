@@ -5,12 +5,12 @@ using NUnit.Framework;
 
 namespace CleanCodeHelper.Analyzer.Test
 {
-    public class ConstructorContainsLogicAnalyzerTest
+    public class ConstructorContainsControlFlowAnalyzerTest
     {
-        [Test, LoadSourceFilesFrom("TestData\\" + nameof(ConstructorContainsLogicAnalyzer))]
+        [Test, LoadSourceFilesFrom("TestData\\" + nameof(ConstructorContainsControlFlowAnalyzer))]
         public async Task Verify(AnnotatedSourceFile sourceFile)
         {
-            await sourceFile.VerifyAsync<ConstructorContainsLogicAnalyzer>();
+            await sourceFile.VerifyAsync<ConstructorContainsControlFlowAnalyzer>();
         }
     }
 }

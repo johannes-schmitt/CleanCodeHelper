@@ -1,7 +1,7 @@
 ﻿using System;
 using CleanCodeHelper.Analyzer.Test.Helper;
 
-namespace CleanCodeHelper.Analyzer.Test.TestData.ConstructorContainsLogicAnalyzer
+namespace CleanCodeHelper.Analyzer.Test.TestData.ConstructorContainsControlFlowAnalyzer
 {
     [ExpectedDiagnostic("CC0005", Arguments = new object[] { nameof(LocalFunctionAtEndWithConditional) }, Line = 9, Column = 16)]
     public class LocalFunctionAtEndWithConditional
