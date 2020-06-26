@@ -1,6 +1,6 @@
 ﻿using CleanCodeHelper.Analyzer.Test.Helper;
 
-namespace CleanCodeHelper.Analyzer.Test.TestData.ConstructorWithLogicAnalyzer
+namespace CleanCodeHelper.Analyzer.Test.TestData.ConstructorContainsLogicAnalyzer
 {
     [NoExpectedDiagnostic]
     public class WithoutConditionals

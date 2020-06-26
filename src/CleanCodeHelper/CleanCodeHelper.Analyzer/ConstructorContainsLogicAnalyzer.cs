@@ -9,8 +9,8 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace CleanCodeHelper.Analyzer
 {
-    [DiagnosticAnalyzer((LanguageNames.CSharp))]
-    public class ConstructorWithLogicAnalyzer : DiagnosticAnalyzer
+    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    public class ConstructorContainsLogicAnalyzer : DiagnosticAnalyzer
     {
         public const string DiagnosticId = "CC0005";
 
