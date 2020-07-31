@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="CleanCodeHelper.Analyzer.edc3675a-483c-4fcc-baed-84b4d74df885" Version="0.0.7" Language="en-US" Publisher="Johannes Schmitt"/>
+    <Identity Id="CleanCodeHelper.Analyzer.edc3675a-483c-4fcc-baed-84b4d74df885" Version="0.0.8" Language="en-US" Publisher="Johannes Schmitt"/>
     <DisplayName>CleanCodeHelper.Analyzer</DisplayName>
     <Description xml:space="preserve">This extension is meant for live testing only, and not considered to be published.</Description>
   </Metadata>

@@ -12,7 +12,7 @@
     <PackageId>CleanCodeHelper.Analyzer</PackageId>
     <Title>Clean Code Helper</Title>
     <Description>Clean Code Helper</Description>
-    <VersionPrefix>0.0.7</VersionPrefix>
+    <VersionPrefix>0.0.8</VersionPrefix>
     <VersionSuffix></VersionSuffix>
     <Authors>Johannes Schmitt</Authors>
     <Copyright>Johannes Schmitt</Copyright>
