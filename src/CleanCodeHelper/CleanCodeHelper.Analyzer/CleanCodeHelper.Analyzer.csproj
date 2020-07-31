@@ -27,7 +27,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CleanCodeHelper.Analyzer" Version="0.0.6">
+    <PackageReference Include="CleanCodeHelper.Analyzer" Version="0.0.7">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.0.0">
